@@ -1,0 +1,85 @@
+/* Rich Text Editor Styles */
+.rich-text-editor .ql-toolbar {
+  border: none;
+  border-bottom: 1px solid #e5e5e5;
+  background: #f9f9f9;
+  padding: 8px 12px;
+}
+
+.rich-text-editor .ql-container {
+  border: none;
+  min-height: 200px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.rich-text-editor .ql-editor {
+  padding: 16px;
+}
+
+.rich-text-editor .ql-editor.ql-blank::before {
+  left: 16px;
+  font-style: normal;
+  color: #a3a3a3;
+}
+
+/* Rich Text Content Display Styles */
+.rich-text-content h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin: 1.5rem 0 1rem;
+  color: #171717;
+}
+
+.rich-text-content h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin: 1.5rem 0 1rem;
+  color: #171717;
+}
+
+.rich-text-content h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 1.25rem 0 0.75rem;
+  color: #171717;
+}
+
+.rich-text-content p {
+  margin-bottom: 1.25rem;
+}
+
+.rich-text-content ul,
+.rich-text-content ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.rich-text-content ul {
+  list-style-type: disc;
+}
+
+.rich-text-content ol {
+  list-style-type: decimal;
+}
+
+.rich-text-content li {
+  margin-bottom: 0.5rem;
+}
+
+.rich-text-content strong {
+  font-weight: 700;
+  color: #171717;
+}
+
+.rich-text-content em {
+  font-style: italic;
+}
+
+.rich-text-content blockquote {
+  border-left: 4px solid #e5e5e5;
+  padding-left: 1rem;
+  font-style: italic;
+  color: #525252;
+  margin: 1.5rem 0;
+}
