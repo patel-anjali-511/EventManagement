@@ -38,7 +38,7 @@ const Users = () => {
     {
       id: "actions",
       header: "Actions",
-      cell: ({ row }) => (
+      cell: () => (
         <div className="flex items-center gap-2">
           <span className="text-[10px] uppercase font-bold text-neutral-300">
             No Actions

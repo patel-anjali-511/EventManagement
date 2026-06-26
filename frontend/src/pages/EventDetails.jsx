@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -25,7 +25,6 @@ const EventDetails = () => {
   const [registering, setRegistering] = useState(false);
   const [registered, setRegistered] = useState(false);
   const [registrations, setRegistrations] = useState([]);
-  const [clientSecret, setClientSecret] = useState("");
   const [paymentProcessing, setPaymentProcessing] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,19 +32,11 @@ const EventDetails = () => {
   const paymentHandled = useRef(false);
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-  });
-
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-
-  useEffect(() => {
-    if (userInfo && userInfo.role === "user") {
-      setFormData({
-        name: userInfo.name || "",
-        email: userInfo.email || "",
-      });
+  const userInfo = useMemo(() => {
+    try {
+      return JSON.parse(localStorage.getItem("userInfo"));
+    } catch {
+      return null;
     }
   }, []);
 
@@ -81,7 +72,7 @@ const EventDetails = () => {
       }
     };
     fetchData();
-  }, [id, location.search]);
+  }, [id, location.search, userInfo, handleRegister]);
 
   const initiateRegistration = async (e) => {
     if (e) e.preventDefault();
@@ -109,7 +100,7 @@ const EventDetails = () => {
     }
   };
 
-  const handleRegister = async (sessionId = null) => {
+  const handleRegister = useCallback(async (sessionId = null) => {
     setRegistering(true);
     setPaymentProcessing(true);
     try {
@@ -133,7 +124,7 @@ const EventDetails = () => {
       setRegistering(false);
       setPaymentProcessing(false);
     }
-  };
+  }, [id, quantity, navigate]);
 
   if (loading)
     return (

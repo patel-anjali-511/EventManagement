@@ -26,7 +26,6 @@ import UpdatePassword from "./pages/UpdatePassword";
 import AdminLayout from "./layouts/AdminLayout";
 import FrontendLayout from "./layouts/FrontendLayout";
 
-// eslint-disable-next-line react/prop-types
 const AdminRoute = ({ children }) => {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   if (!userInfo || !userInfo.token || userInfo.role !== "admin")
@@ -44,7 +43,6 @@ const PAGE_PATHS = {
   roles: "/admin/roles",
 };
 
-// eslint-disable-next-line react/prop-types
 const PermissionRoute = ({ permission, children }) => {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const permissions = userInfo?.permissions;

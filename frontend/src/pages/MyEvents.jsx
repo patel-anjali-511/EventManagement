@@ -34,8 +34,7 @@ const MyEvents = () => {
   const [isCancelling, setIsCancelling] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");
   const navigate = useNavigate();
-
-  const now = new Date();
+  const now = useMemo(() => new Date(), []);
 
   const fetchMyRegistrations = async () => {
     try {
@@ -70,7 +69,7 @@ const MyEvents = () => {
           return true;
       }
     });
-  }, [registrations, activeFilter]);
+  }, [registrations, activeFilter, now]);
 
   const handleCancelClick = (reg) => {
     setCancellingRegistration(reg);
@@ -108,20 +107,23 @@ const MyEvents = () => {
             <div className="flex items-center gap-2 shrink-0">
               <Filter size={14} className="text-neutral-400" />
               <div className="flex items-center gap-1 bg-neutral-100 rounded-xl p-1">
-                {FILTERS.map(({ key, label, icon: Icon }) => (
-                  <button
-                    key={key}
-                    onClick={() => setActiveFilter(key)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                      activeFilter === key
-                        ? "bg-white text-neutral-900 shadow-sm"
-                        : "text-neutral-400 hover:text-neutral-600"
-                    }`}
-                  >
-                    <Icon size={11} />
-                    {label}
-                  </button>
-                ))}
+                {FILTERS.map((f) => {
+                  const Icon = f.icon;
+                  return (
+                    <button
+                      key={f.key}
+                      onClick={() => setActiveFilter(f.key)}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                        activeFilter === f.key
+                          ? "bg-white text-neutral-900 shadow-sm"
+                          : "text-neutral-400 hover:text-neutral-600"
+                      }`}
+                    >
+                      <Icon size={11} />
+                      {f.label}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           )}

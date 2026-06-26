@@ -30,7 +30,7 @@ const TicketView = () => {
         } else {
           setError("Ticket not found or unauthorized");
         }
-      } catch (err) {
+      } catch {
         setError("Failed to load ticket");
       } finally {
         setLoading(false);
